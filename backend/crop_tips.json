@@ -1,0 +1,134 @@
+{
+  "rice": {
+    "fertilizer": "Apply Nitrogen-rich fertilizers in split doses (e.g., Urea). Ensure adequate Phosphorus (DAP) at planting and Potassium for grain filling.",
+    "watering": "Maintain standing water (5-10 cm) during early vegetative stages. Drain water 10-15 days before harvesting.",
+    "soil_care": "Clayey or clay loam soils that retain moisture are ideal. Prepare soil by puddling (tilling in water) to reduce percolation loss.",
+    "harvesting": "Harvest when 80-85% of the grains turn straw-colored and moisture content drops to around 20%."
+  },
+  "maize": {
+    "fertilizer": "Requires balanced N-P-K. Apply Nitrogen at knee-high and tasseling stages, and Phosphorus during land preparation.",
+    "watering": "Irrigate at critical stages: tasseling, silking, and grain filling. Avoid waterlogging which damages roots.",
+    "soil_care": "Well-drained sandy loam to clay loam soils. Ensure deep tillage to allow roots to penetrate deep.",
+    "harvesting": "Harvest when the moisture content is 20-25% and the husks turn yellow-brown."
+  },
+  "chickpea": {
+    "fertilizer": "Requires low Nitrogen as it is a legume. Apply Starter Nitrogen and balanced Phosphorus/Sulfur.",
+    "watering": "Highly drought-tolerant. Irrigate once at branching and once at pod-development stage if rain is scarce.",
+    "soil_care": "Sandy clay loam or well-drained loamy soils. Avoid saline or alkaline soils, and maintain loose soil bed.",
+    "harvesting": "Harvest when leaves turn yellow and pods dry out. Grains should rattle inside the pods."
+  },
+  "kidneybeans": {
+    "fertilizer": "Legume crop, but benefits from starter Nitrogen and moderate Phosphorus. Avoid excessive Nitrogen as it delays maturity.",
+    "watering": "Keep soil uniformly moist but not soggy. Irrigate during flowering and pod development.",
+    "soil_care": "Light loam to clay loam soils with good drainage. Extremely sensitive to waterlogging.",
+    "harvesting": "Harvest when pods turn dry, straw-colored, and brittle."
+  },
+  "pigeonpies": {
+    "fertilizer": "Apply a starter dose of Nitrogen along with Phosphorus. Rhizobium inoculation helps nitrogen fixation.",
+    "watering": "Grows well under rainfed conditions. Provide irrigation during flower initiation and pod filling if dry.",
+    "soil_care": "Requires deep, well-drained loamy or clayey soils. Sensitive to waterlogging.",
+    "harvesting": "Harvest when 75-80% of the pods turn brown and dry."
+  },
+  "mothbeans": {
+    "fertilizer": "Drought-hardy legume. Minimal fertilizer needed. Apply starter Phosphorus.",
+    "watering": "Extremely drought-resistant. Only water during severe, prolonged dry spells.",
+    "soil_care": "Sandy or light-textured soils with excellent drainage. Can tolerate poor soils.",
+    "harvesting": "Harvest when pods turn yellowish-brown and are fully dry."
+  },
+  "mungbean": {
+    "fertilizer": "Rhizobium treatment recommended. Apply starter N and moderate P.",
+    "watering": "Requires 2-3 irrigations: at branching, flowering, and pod-filling stages. Highly sensitive to waterlogging.",
+    "soil_care": "Well-drained loamy to sandy loam soils. Maintain neutral pH.",
+    "harvesting": "Harvest in multiple pickings as pods mature, or cut whole plant when 80% of pods turn black."
+  },
+  "blackgram": {
+    "fertilizer": "Apply starter Nitrogen and Phosphorus. Use Biofertilizers like Phosphobacteria for better yield.",
+    "watering": "Water at flowering and pod filling. Keep soil moist but avoid waterlogging.",
+    "soil_care": "Loamy to clayey soils with good drainage. Can tolerate slightly heavier soils than mungbeans.",
+    "harvesting": "Harvest when pods turn dark brown or black and dry out."
+  },
+  "lentil": {
+    "fertilizer": "Requires starter Nitrogen and high Phosphorus. Sulfur application improves grain quality.",
+    "watering": "Grows well on residual moisture. Water once or twice at flowering and pod filling if soil is dry.",
+    "soil_care": "Well-drained light loams to clay loams. Tolerates acidic soils better than other pulses.",
+    "harvesting": "Harvest when the plants turn yellow and pods dry up, but before they split open."
+  },
+  "pomegranate": {
+    "fertilizer": "Apply organic manure annually. Supplement with balanced N-P-K, Zinc, and Boron during flowering and fruit set.",
+    "watering": "Drip irrigation is highly recommended. Regular watering during fruit growth prevents fruit cracking.",
+    "soil_care": "Well-drained sandy loam or alluvial soils. Tolerates mild alkalinity and salinity.",
+    "harvesting": "Harvest when fruits turn yellowish-red and give a metallic sound when tapped."
+  },
+  "banana": {
+    "fertilizer": "Heavy feeder. Requires high Potassium and Nitrogen. Apply in regular monthly split doses.",
+    "watering": "Requires high moisture. Maintain uniform moisture around root zone. Drip irrigation is highly recommended.",
+    "soil_care": "Rich, deep, well-drained loamy soil with high organic matter. Keep pH between 6.0 and 7.5.",
+    "harvesting": "Harvest bunches when the fruits turn plump, green angles start flattening, and top leaves begin drying."
+  },
+  "mango": {
+    "fertilizer": "Apply Nitrogen and Potassium to young trees. Mature trees require Nitrogen, Phosphorus, Potassium, and micronutrients after harvest.",
+    "watering": "Irrigate young plants regularly. Mature trees need irrigation during fruit development but dry period before flowering.",
+    "soil_care": "Deep, well-drained loamy or alluvial soils. Avoid soils with hard pan layers.",
+    "harvesting": "Harvest when fruits start changing color from green to light yellow, and a few ripe fruits fall naturally."
+  },
+  "grapes": {
+    "fertilizer": "Apply Nitrogen during early growth, and Potassium during berry development. Zinc and Boron prevent fruit drop.",
+    "watering": "Drip irrigation is preferred. Reduce watering during ripening stage to increase sugar content.",
+    "soil_care": "Sandy loam to gravelly loam soils with good drainage. Grapes prefer slightly acidic to neutral pH.",
+    "harvesting": "Harvest when grapes reach full color, sweetness, and the stems turn brown."
+  },
+  "watermelon": {
+    "fertilizer": "Apply Phosphorus-heavy fertilizer at planting. Switch to Nitrogen/Potassium when vines start running.",
+    "watering": "Requires abundant watering during growth and flowering. Reduce watering as fruits ripen to prevent bursting.",
+    "soil_care": "Sandy loam soils that warm up quickly are best. Ensure high organic content.",
+    "harvesting": "Harvest when the underside spot turns creamy-yellow, and the tendril near the fruit dries up."
+  },
+  "muskmelon": {
+    "fertilizer": "Requires balanced N-P-K. Apply Nitrogen during vine growth and Potassium during fruit enlargement.",
+    "watering": "Irrigate regularly. Avoid overhead watering to prevent leaf diseases. Reduce watering before harvest.",
+    "soil_care": "Sandy loam or loamy soils with high drainage. Prefers warm soil temperatures.",
+    "harvesting": "Harvest at 'full slip' stage (when the stem separates easily from the fruit with light pressure)."
+  },
+  "apple": {
+    "fertilizer": "Apply balanced N-P-K and Calcium annually. Calcium prevents bitter pit disorder in apples.",
+    "watering": "Requires regular moisture, especially during bloom and fruit set. Avoid waterlogging around root collar.",
+    "soil_care": "Deep, well-drained loamy soils. Maintain organic mulch around trees to conserve moisture.",
+    "harvesting": "Harvest when the skin color develops fully, flesh is firm, and starch-iodine test indicates ripeness."
+  },
+  "orange": {
+    "fertilizer": "Requires regular Nitrogen, Zinc, Iron, and Manganese. Apply fertilizers 3-4 times a year.",
+    "watering": "Irrigate regularly, avoiding dry spells followed by heavy watering (causes fruit splitting).",
+    "soil_care": "Deep, well-drained sandy loam or clay loam soils. Avoid soils with high water tables.",
+    "harvesting": "Harvest when fruits turn fully orange and develop sweet taste. Cut with clippers."
+  },
+  "papaya": {
+    "fertilizer": "Fast grower. Requires heavy and frequent application of Nitrogen, Phosphorus, and Potassium.",
+    "watering": "Keep soil moist but not wet. Extremely sensitive to waterlogging (causes root rot in 48 hours).",
+    "soil_care": "Sandy loam soils with excellent drainage and high organic matter. Maintain pH of 6.0 - 6.5.",
+    "harvesting": "Harvest when latex turns clear rather than milky, and skin shows yellow streaks (color break)."
+  },
+  "coconut": {
+    "fertilizer": "Apply high Potassium (Muriate of Potash), Nitrogen, and Magnesium. Supplement with common salt (sodium).",
+    "watering": "Requires plenty of water. Irrigate during dry months (drip or basin irrigation).",
+    "soil_care": "Sandy loam, alluvial, or lateritic soils. Can tolerate sandy coastal soils if water table is accessible.",
+    "harvesting": "Harvest fully mature nuts (11-12 months old) for copra/oil, or tender nuts (7-8 months old) for water."
+  },
+  "cotton": {
+    "fertilizer": "Requires high Nitrogen (apply in splits) and balanced Phosphorus/Potassium. Boron is essential for boll development.",
+    "watering": "Irrigate at critical stages: squaring, flowering, and boll development. Reduce watering during boll opening.",
+    "soil_care": "Deep black soils (regur) or deep loams with good water retention and drainage.",
+    "harvesting": "Harvest (pick) when bolls are fully open and dry. Avoid picking wet cotton."
+  },
+  "jute": {
+    "fertilizer": "Apply Nitrogen in split doses. Supplement with moderate Phosphorus and Potassium during land preparation.",
+    "watering": "Requires high rainfall and humidity. Flood irrigation or heavy moisture is necessary during early growth.",
+    "soil_care": "Alluvial sandy loam or clay loam soils found in river basins. Tolerates waterlogging after early growth.",
+    "harvesting": "Harvest at the small pod/flowering stage (120-135 days) to get the best quality fiber."
+  },
+  "coffee": {
+    "fertilizer": "Apply balanced N-P-K. Requires higher Nitrogen and Potassium. Micronutrients like Zinc and Boron are vital.",
+    "watering": "Requires well-distributed rainfall. A dry period of 2-3 months is needed before blossom showers.",
+    "soil_care": "Deep, rich, organic, acidic soils (pH 5.0 - 6.0) under shade tree canopy. Excellent drainage is critical.",
+    "harvesting": "Harvest only the fully ripe, bright red cherries (selective picking) for premium quality."
+  }
+}

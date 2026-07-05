@@ -1,0 +1,289 @@
+import json
+import os
+
+notebook = {
+    "cells": [
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "# OptiCrop – Exploratory Data Analysis & Model Comparison\n",
+                "\n",
+                "This notebook analyzes the **Crop Recommendation Dataset** and evaluates three classification algorithms:\n",
+                "1. **Random Forest Classifier**\n",
+                "2. **XGBoost Classifier**\n",
+                "3. **Support Vector Machine (SVM)**\n",
+                "\n",
+                "The goal is to select the best model to deploy in our FastAPI backend for predicting suitable crops based on soil and weather parameters."
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "import os\n",
+                "import pandas as pd\n",
+                "import numpy as np\n",
+                "import matplotlib.pyplot as plt\n",
+                "import seaborn as sns\n",
+                "from sklearn.model_selection import train_test_split\n",
+                "from sklearn.preprocessing import StandardScaler, LabelEncoder\n",
+                "from sklearn.ensemble import RandomForestClassifier\n",
+                "from sklearn.svm import SVC\n",
+                "from xgboost import XGBClassifier\n",
+                "from sklearn.metrics import classification_report, accuracy_score, f1_score, confusion_matrix\n",
+                "\n",
+                "# Print settings\n",
+                "sns.set_theme(style=\"whitegrid\")\n",
+                "%matplotlib inline"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## 1. Load the Dataset"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "csv_path = \"../Crop_recommendation.csv\"\n",
+                "if not os.path.exists(csv_path):\n",
+                "    csv_path = \"Crop_recommendation.csv\"\n",
+                "    \n",
+                "df = pd.read_csv(csv_path)\n",
+                "print(f\"Dataset Shape: {df.shape}\")\n",
+                "df.head()"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## 2. Exploratory Data Analysis (EDA)"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Crop Label Distribution\n",
+                "Let's see if the crop labels are balanced."
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "plt.figure(figsize=(15, 6))\n",
+                "sns.countplot(data=df, x='label', order=df['label'].value_counts().index, palette='viridis')\n",
+                "plt.title(\"Distribution of Crops in the Dataset\", fontsize=16)\n",
+                "plt.xlabel(\"Crop Type\", fontsize=12)\n",
+                "plt.ylabel(\"Count\", fontsize=12)\n",
+                "plt.xticks(rotation=45)\n",
+                "plt.tight_layout()\n",
+                "plt.show()"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Feature Correlation Analysis\n",
+                "Let's check if the soil and weather parameters have strong correlations."
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "plt.figure(figsize=(10, 8))\n",
+                "numeric_df = df.drop(columns=['label'])\n",
+                "sns.heatmap(numeric_df.corr(), annot=True, cmap=\"YlGnBu\", fmt=\".2f\", cbar=True, square=True)\n",
+                "plt.title(\"Correlation Matrix of Environmental Features\", fontsize=16)\n",
+                "plt.tight_layout()\n",
+                "plt.show()"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Feature Distributions Per Crop\n",
+                "Let's analyze feature distribution ranges across crops using box plots."
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "features = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']\n",
+                "fig, axes = plt.subplots(4, 2, figsize=(16, 22))\n",
+                "axes = axes.flatten()\n",
+                "\n",
+                "for idx, feat in enumerate(features):\n",
+                "    sns.boxplot(data=df, x='label', y=feat, ax=axes[idx], palette='Set2')\n",
+                "    axes[idx].set_xticklabels(axes[idx].get_xticklabels(), rotation=90)\n",
+                "    axes[idx].set_title(f\"{feat} Distribution per Crop\", fontsize=14)\n",
+                "    axes[idx].set_xlabel(\"\")\n",
+                "    \n",
+                "# Hide unused last plot\n",
+                "fig.delaxes(axes[-1])\n",
+                "\n",
+                "plt.tight_layout()\n",
+                "plt.show()"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## 3. Data Preprocessing"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "X = df[features]\n",
+                "y = df['label']\n",
+                "\n",
+                "# Label Encode Target variable (string to integer)\n",
+                "le = LabelEncoder()\n",
+                "y_encoded = le.fit_transform(y)\n",
+                "\n",
+                "# Train-Test Split\n",
+                "X_train, X_test, y_train, y_test = train_test_split(\n",
+                "    X, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded\n",
+                ")\n",
+                "\n",
+                "# Scaler Initialization\n",
+                "scaler = StandardScaler()\n",
+                "X_train_scaled = scaler.fit_transform(X_train)\n",
+                "X_test_scaled = scaler.transform(X_test)\n",
+                "\n",
+                "print(f\"Training set shape: {X_train_scaled.shape}\")\n",
+                "print(f\"Testing set shape: {X_test_scaled.shape}\")"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## 4. Model Training & Evaluation\n",
+                "\n",
+                "Let's compare the performance of Random Forest, XGBoost, and Support Vector Machine."
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "models = {\n",
+                "    \"Random Forest\": RandomForestClassifier(n_estimators=100, random_state=42),\n",
+                "    \"XGBoost\": XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', random_state=42),\n",
+                "    \"Support Vector Machine\": SVC(probability=True, random_state=42)\n",
+                "}\n",
+                "\n",
+                "results = {}\n",
+                "for name, model in models.items():\n",
+                "    model.fit(X_train_scaled, y_train)\n",
+                "    preds = model.predict(X_test_scaled)\n",
+                "    \n",
+                "    acc = accuracy_score(y_test, preds)\n",
+                "    f1 = f1_score(y_test, preds, average='weighted')\n",
+                "    results[name] = {\"accuracy\": acc, \"f1_score\": f1, \"model\": model}\n",
+                "    \n",
+                "    print(f\"=== {name} ===\")\n",
+                "    print(f\"Accuracy: {acc:.4f}\")\n",
+                "    print(f\"Weighted F1-Score: {f1:.4f}\\n\")"
+            ]
+        },
+        {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## 5. Visualizing Confusion Matrix & Feature Importance"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "best_name = max(results, key=lambda k: results[k]['f1_score'])\n",
+                "best_model = results[best_name]['model']\n",
+                "preds = best_model.predict(X_test_scaled)\n",
+                "\n",
+                "plt.figure(figsize=(15, 12))\n",
+                "cm = confusion_matrix(y_test, preds)\n",
+                "sns.heatmap(cm, annot=True, fmt='d', xticklabels=le.classes_, yticklabels=le.classes_, cmap=\"Greens\")\n",
+                "plt.title(f\"Confusion Matrix for Best Performing Model: {best_name}\", fontsize=16)\n",
+                "plt.xlabel(\"Predicted Crop Label\")\n",
+                "plt.ylabel(\"True Crop Label\")\n",
+                "plt.tight_layout()\n",
+                "plt.show()"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "# Plot feature importance if supported by model\n",
+                "if hasattr(best_model, 'feature_importances_'):\n",
+                "    importances = best_model.feature_importances_\n",
+                "    indices = np.argsort(importances)[::-1]\n",
+                "    \n",
+                "    plt.figure(figsize=(10, 6))\n",
+                "    sns.barplot(x=importances[indices], y=[features[i] for i in indices], palette='mako')\n",
+                "    plt.title(f\"Feature Importance Profile ({best_name})\", fontsize=16)\n",
+                "    plt.xlabel(\"Relative Importance Score\")\n",
+                "    plt.ylabel(\"Feature\")\n",
+                "    plt.tight_layout()\n",
+                "    plt.show()\n",
+                "else:\n",
+                "    print(f\"The best model ({best_name}) does not support direct feature importance inspection.\")"
+            ]
+        }
+    ],
+    "metadata": {
+        "kernelspec": {
+            "display_name": "Python 3",
+            "language": "python",
+            "name": "python3"
+        },
+        "language_info": {
+            "name": "python"
+        }
+    },
+    "nbformat": 4,
+    "nbformat_minor": 2
+}
+
+# Ensure notebooks directory exists
+os.makedirs("notebooks", exist_ok=True)
+notebook_path = os.path.join("notebooks", "eda_and_model_comparison.ipynb")
+
+with open(notebook_path, "w") as f:
+    json.dump(notebook, f, indent=4)
+
+print(f"Successfully generated {notebook_path}!")

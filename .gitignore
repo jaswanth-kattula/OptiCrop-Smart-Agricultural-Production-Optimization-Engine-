@@ -1,0 +1,35 @@
+# Python virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Python compiled cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Node.js dependencies
+node_modules/
+frontend/node_modules/
+
+# Frontend builds
+frontend/dist/
+dist/
+
+# Local database instances
+*.db
+backend/opticrop.db
+opticrop.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS Metadata
+.DS_Store
+Thumbs.db
